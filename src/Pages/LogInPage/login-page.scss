@@ -1,4 +1,15 @@
-.div-logIn-page {
+.div-login-page {
   background-color: #6c757d;
   flex-grow: 1;
+  color: #fff;
+  form {
+    margin: 0 auto;
+    margin-top: 200px;
+    text-align: center;
+    width: 50%;
+    color: #fff;
+  }
+  button {
+    margin-top: 20px;
+  }
 }
