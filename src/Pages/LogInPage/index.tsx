@@ -30,8 +30,7 @@ const LogInPage = () => {
   const [form] = Form.useForm();
   const username = useWatch("myUsername", form);
   const password = useWatch("myPassword", form);
-  // console.log(userContext?.user);
-  // console.log(password);
+
   return (
     <>
       <Header />
