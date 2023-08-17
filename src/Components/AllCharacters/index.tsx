@@ -5,11 +5,36 @@ import Loader from "../Loader";
 import "./all-char.scss";
 interface AllCharactersProps {
   handleOpen: (char: any) => void;
+  searchType: string;
+  searchValue: string;
 }
 
-const AllCharacters: React.FC<AllCharactersProps> = ({ handleOpen }) => {
+const AllCharacters: React.FC<AllCharactersProps> = ({
+  handleOpen,
+  searchType,
+  searchValue,
+}) => {
   const userContext = useContext(UserContext);
-  const characterNames = userContext?.data?.results;
+  const characterData = userContext?.data?.results;
+
+  let filteredCharacters = characterData;
+  if (searchType === "name") {
+    filteredCharacters = characterData?.filter((char) =>
+      char.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  } else if (searchType === "species") {
+    filteredCharacters = characterData?.filter((char) =>
+      char.species.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  } else if (searchType === "gender") {
+    filteredCharacters = characterData?.filter((char) =>
+      char.gender.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  } else if (searchType === "species") {
+    filteredCharacters = characterData?.filter((char) =>
+      char.gender.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }
   if (!userContext?.data) {
     return (
       <div>
@@ -19,7 +44,7 @@ const AllCharacters: React.FC<AllCharactersProps> = ({ handleOpen }) => {
   }
   return (
     <div className="div-all-characters">
-      {characterNames?.map((char, i) => (
+      {filteredCharacters?.map((char, i) => (
         <section onClick={() => handleOpen(char)} key={i}>
           <h3>{char.name}</h3>
           <img src={char.image} alt="" />

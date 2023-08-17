@@ -1,4 +1,9 @@
-import { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
 export type AuthUser = {
@@ -8,9 +13,15 @@ export type AuthUser = {
 export type ApiData = {
   results: Character[];
 };
+export type SearchValue = {
+  data: any;
+};
 interface Character {
   name: string;
   image: string;
+  species: string;
+  status: string;
+  gender: string;
 }
 
 type UserContextType = {
@@ -21,6 +32,9 @@ type UserContextType = {
   navigateToHome: () => void;
   navigateToFavorites: () => void;
   navigateToChar: () => void;
+  handleSearch: (input: any, type: string) => void;
+  searchValue: SearchValue | null;
+  searchType: string | null;
 };
 
 type UserContextProviderProps = {
@@ -31,6 +45,8 @@ export const UserContext = createContext<UserContextType | null>(null);
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [data, setData] = useState<ApiData | null>(null);
+  const [searchValue, setSearchValue] = useState<SearchValue | null>(null);
+  const [searchType, setSearchType] = useState<string | null>(null);
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     const storedPassword = localStorage.getItem("password");
@@ -40,7 +56,13 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     }
   }, []);
   const navigate = useNavigate();
-
+  const handleSearch = (
+    input: SetStateAction<SearchValue | null>,
+    type: string
+  ) => {
+    setSearchValue({ data: input });
+    setSearchType(type);
+  };
   const navigateToHome = () => {
     localStorage.clear();
     setUser(null);
@@ -63,6 +85,9 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         navigateToHome,
         navigateToFavorites,
         navigateToChar,
+        handleSearch,
+        searchValue,
+        searchType,
       }}
     >
       {children}
