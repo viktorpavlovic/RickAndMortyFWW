@@ -63,3 +63,16 @@
 .can {
   width: 100%;
 }
+@media only screen and (min-width: 900px) {
+  .div-favorites-page {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+.favo-tittle {
+  background-color: #6c757d;
+  text-align: center;
+  color: #fff;
+  padding: 10px;
+}

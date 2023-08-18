@@ -40,9 +40,8 @@ const FavoritesPage = () => {
   return (
     <>
       <Header content="Logout" home="Home" />
+      <h1 className="favo-tittle">Your Favorites</h1>
       <div className="div-favorites-page">
-        <h1>Your Favorites</h1>
-
         {favorites?.map((char, i) => (
           <section key={i}>
             <h3>{char.name}</h3>

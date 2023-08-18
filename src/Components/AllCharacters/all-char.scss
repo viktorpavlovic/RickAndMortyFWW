@@ -17,3 +17,10 @@
     }
   }
 }
+@media only screen and (min-width: 900px) {
+  .div-all-characters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
