@@ -5,8 +5,12 @@ import AllCharacters from "../../Components/AllCharacters";
 import Footer from "../../Components/Footer";
 import CharModal from "../../Components/CharModal";
 import SearchInput from "../../Components/SearchInput";
-import SelectRick from "../../Components/SelectRick";
+import StatusSelect from "../../Components/StatusSelect";
+import GenderSelect from "../../Components/GenderSelect";
+import Pagination from "../../Components/Pagination";
+
 import "./home-page.scss";
+
 const HomePage: React.FC = () => {
   const [modal, setModal] = useState(false);
   const [clickedChar, setClickedChar] = useState(null);
@@ -33,7 +37,12 @@ const HomePage: React.FC = () => {
             placeholder="Search by Species"
             onSearch={(value) => userContext?.handleSearch(value, "species")}
           />
-          <SelectRick />
+          <StatusSelect
+            onSearch={(value) => userContext?.handleSearch(value, "status")}
+          />
+          <GenderSelect
+            onSearch={(value) => userContext?.handleSearch(value, "gender")}
+          />
         </div>
         <AllCharacters
           handleOpen={handleOpen}
@@ -43,6 +52,7 @@ const HomePage: React.FC = () => {
         {modal && (
           <CharModal clickedChar={clickedChar} handleClose={handleClose} />
         )}
+        <Pagination />
       </div>
       <Footer />
     </>

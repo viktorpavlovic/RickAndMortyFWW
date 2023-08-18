@@ -11,7 +11,7 @@ const LazyFavoritesPage = lazy(() => import("./Pages/FavoritesPage"));
 
 function App() {
   useEffect(() => {
-    const url = "https://rickandmortyapi.com/api/character/?page=2";
+    const url = "https://rickandmortyapi.com/api/character";
     axios.get(url).then((response) => {
       userContext?.setData(response.data);
     });

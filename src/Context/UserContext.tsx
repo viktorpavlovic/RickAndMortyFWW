@@ -23,6 +23,11 @@ interface Character {
   status: string;
   gender: string;
 }
+interface FavoriteCharacter {
+  name: string;
+  image: string;
+  species: string;
+}
 
 type UserContextType = {
   user: AuthUser | null;
@@ -35,18 +40,24 @@ type UserContextType = {
   handleSearch: (input: any, type: string) => void;
   searchValue: SearchValue | null;
   searchType: string | null;
+  favorites: FavoriteCharacter[];
+  setFavorites: React.Dispatch<React.SetStateAction<FavoriteCharacter[]>>;
 };
 
 type UserContextProviderProps = {
   children: React.ReactNode;
 };
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<UserContextType>(null as any);
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [data, setData] = useState<ApiData | null>(null);
   const [searchValue, setSearchValue] = useState<SearchValue | null>(null);
   const [searchType, setSearchType] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<FavoriteCharacter[]>(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     const storedPassword = localStorage.getItem("password");
@@ -64,9 +75,10 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     setSearchType(type);
   };
   const navigateToHome = () => {
-    localStorage.clear();
-    setUser(null);
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
 
+    setUser(null);
     navigate("/");
   };
   const navigateToFavorites = () => {
@@ -75,6 +87,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const navigateToChar = () => {
     navigate("/home");
   };
+
   return (
     <UserContext.Provider
       value={{
@@ -88,6 +101,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         handleSearch,
         searchValue,
         searchType,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

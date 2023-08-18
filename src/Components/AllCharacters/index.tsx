@@ -26,11 +26,11 @@ const AllCharacters: React.FC<AllCharactersProps> = ({
     filteredCharacters = characterData?.filter((char) =>
       char.species.toLowerCase().includes(searchValue.toLowerCase())
     );
-  } else if (searchType === "gender") {
+  } else if (searchType === "status") {
     filteredCharacters = characterData?.filter((char) =>
-      char.gender.toLowerCase().includes(searchValue.toLowerCase())
+      char.status.toLowerCase().includes(searchValue.toLowerCase())
     );
-  } else if (searchType === "species") {
+  } else if (searchType === "gender") {
     filteredCharacters = characterData?.filter((char) =>
       char.gender.toLowerCase().includes(searchValue.toLowerCase())
     );
