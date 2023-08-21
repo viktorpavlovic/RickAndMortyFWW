@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../Context/UserContext";
 import Header from "../../Components/Header";
 import AllCharacters from "../../Components/AllCharacters";
@@ -7,15 +7,19 @@ import CharModal from "../../Components/CharModal";
 import SearchInput from "../../Components/SearchInput";
 import StatusSelect from "../../Components/StatusSelect";
 import GenderSelect from "../../Components/GenderSelect";
-import Pagination from "../../Components/Pagination";
+import RickPagination from "../../Components/Pagination";
 
 import "./home-page.scss";
+import { Button } from "antd";
 
 const HomePage: React.FC = () => {
   const [modal, setModal] = useState(false);
   const [clickedChar, setClickedChar] = useState(null);
   const userContext = useContext(UserContext);
-
+  const topRef = useRef<HTMLDivElement>(null);
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   const handleOpen = (char: React.SetStateAction<null>) => {
     setClickedChar(char);
     setModal(true);
@@ -25,9 +29,9 @@ const HomePage: React.FC = () => {
   };
   return (
     <>
-      <Header content="Logout" favorites="Favorites" />
+      <Header content="Logout" favorites="Favorites" home="Home" />
 
-      <div className="div-home-page">
+      <div className="div-home-page" ref={topRef}>
         <div className="inputs">
           <SearchInput
             placeholder="Search by Name"
@@ -52,7 +56,10 @@ const HomePage: React.FC = () => {
         {modal && (
           <CharModal clickedChar={clickedChar} handleClose={handleClose} />
         )}
-        <Pagination />
+        <RickPagination />
+        <Button onClick={scrollToTop} className="top-btn">
+          Top
+        </Button>
       </div>
       <Footer />
     </>

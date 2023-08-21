@@ -39,7 +39,7 @@ const FavoritesPage = () => {
 
   return (
     <>
-      <Header content="Logout" home="Home" />
+      <Header content="Logout" home="Home" favorites="Favorites" />
       <h1 className="favo-tittle">Your Favorites</h1>
       <div className="div-favorites-page">
         {favorites?.map((char, i) => (
@@ -55,9 +55,17 @@ const FavoritesPage = () => {
                 onClick={() => handleRemoveFavorite(i)}
               />
             </div>
-            <Button type="primary" onClick={() => handleOpen(char)}>
-              Edit
-            </Button>
+            <div className="can-and-edit">
+              <Button type="primary" onClick={() => handleOpen(char)}>
+                Edit
+              </Button>
+              <img
+                src={can}
+                alt=""
+                className="mobile-delete"
+                onClick={() => handleRemoveFavorite(i)}
+              />
+            </div>
           </section>
         ))}
         {modal && (

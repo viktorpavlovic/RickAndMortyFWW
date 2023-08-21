@@ -12,7 +12,7 @@ interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> = ({ content, favorites, home }) => {
   const userContext = useContext(UserContext);
-  const isUserLoggedIn = userContext?.user !== null;
+  const isUserLoggedIn = localStorage.getItem("username" && "password");
   return (
     <header>
       <img src={Logo} alt="Rick And Morty" />

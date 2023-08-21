@@ -10,15 +10,21 @@ const LazyHomePage = lazy(() => import("./Pages/HomePage"));
 const LazyFavoritesPage = lazy(() => import("./Pages/FavoritesPage"));
 
 function App() {
-  useEffect(() => {
-    const url = "https://rickandmortyapi.com/api/character";
-    axios.get(url).then((response) => {
-      userContext?.setData(response.data);
-    });
-  }, []);
   const getUser = localStorage.getItem("username");
   const getPassword = localStorage.getItem("password");
   const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    const url = userContext?.currentPageUrl;
+    if (url) {
+      axios.get(url).then((response) => {
+        userContext?.setData(response.data);
+        userContext?.setNextPageUrl(response.data.info.next);
+        userContext?.setPrevPageUrl(response.data.info.prev);
+        userContext.setPages(response.data.info.pages);
+      });
+    }
+  }, [userContext?.currentPageUrl]);
 
   return (
     <div className="div-app">

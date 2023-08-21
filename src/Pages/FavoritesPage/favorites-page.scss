@@ -30,7 +30,8 @@
     button {
       margin-top: 10px;
       background-color: black;
-      width: 50%;
+      width: 80%;
+      height: 50px;
     }
   }
   section:hover .image {
@@ -69,10 +70,29 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+  .mobile-delete {
+    display: none;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .can {
+    display: none;
+  }
 }
 .favo-tittle {
   background-color: #6c757d;
   text-align: center;
   color: #fff;
   padding: 10px;
+}
+.mobile-delete {
+  width: 50px;
+  cursor: pointer;
+}
+.can-and-edit {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
