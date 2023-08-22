@@ -3,12 +3,12 @@ import "./select.scss";
 import { Select } from "antd";
 
 interface StatusSelectProps {
-  onSearch: (value: string) => void;
+  statusSearch: (value: string) => void;
 }
 
-const StatusSelect: React.FC<StatusSelectProps> = ({ onSearch }) => {
+const StatusSelect: React.FC<StatusSelectProps> = ({ statusSearch }) => {
   const handleChange = (value: { value: string; label: React.ReactNode }) => {
-    onSearch(value.value);
+    statusSearch(value.value);
   };
   return (
     <div className="div-status-select">

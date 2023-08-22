@@ -3,7 +3,7 @@ import Search from "antd/es/input/Search";
 import "./search-input.scss";
 interface SearchInputProps {
   placeholder: string;
-  onSearch: (value: string) => void;
+  onSearch: (name: string) => void;
 }
 const SearchInput: React.FC<SearchInputProps> = ({ placeholder, onSearch }) => {
   const [searchValue, setSearchValue] = useState("");

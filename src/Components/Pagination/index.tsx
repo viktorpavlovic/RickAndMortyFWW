@@ -4,7 +4,11 @@ import { UserContext } from "../../Context/UserContext";
 import "./rick-pagination.scss";
 import { Button } from "antd";
 
-const RickPagination: React.FC = () => {
+interface RickPaginationProps {
+  freshData: boolean;
+}
+
+const RickPagination: React.FC<RickPaginationProps> = ({ freshData }) => {
   const userContext = useContext(UserContext);
   const nextPage = userContext?.nextPage;
   const prevPage = userContext?.prevPage;

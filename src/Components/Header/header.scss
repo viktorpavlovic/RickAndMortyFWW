@@ -1,7 +1,11 @@
+:root {
+  --mainColor: #000;
+  --mainColorLight: #5767aa;
+  --secondaryColor: #db2b39;
+  --textColor: #eee;
+}
+
 header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   height: 10vh;
   background-color: #000;
   img {
@@ -11,4 +15,79 @@ header {
     color: azure;
     cursor: pointer;
   }
+  nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+    .logout-btn {
+      width: 120px;
+      cursor: pointer;
+    }
+  }
+  .nav-close-btn {
+    display: none;
+  }
+}
+
+header .nav-btn {
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--textColor);
+  visibility: hidden;
+  opacity: 0;
+  font-size: 3rem;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+  header .nav-btn {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  header nav {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: var(--mainColor);
+    transition: 1s;
+  }
+
+  header .responsive_nav {
+    transform: translateY(100vh);
+    z-index: 1;
+  }
+
+  nav .nav-close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: block;
+  }
+
+  nav p {
+    font-size: 1.5rem;
+  }
+}
+.logout-btn {
+  width: 60%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
